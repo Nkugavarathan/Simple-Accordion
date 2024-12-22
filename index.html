@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion with Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: aliceblue;
+        }
+
+        .accordion {
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .accordion-title {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .content-container {
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .qustion {
+            padding: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #f7f7f7;
+            transition: background-color 0.3s ease;
+        }
+
+        .qustion:hover {
+            background-color: #eaeaea;
+        }
+
+        .answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            color: #555;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .content-container.active .answer {
+            max-height: 100px; /* Adjust based on expected content size */
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="accordion">
+        <h2 class="accordion-title">Frequently Asked Questions</h2>
+        <div class="content-container">
+            <div class="qustion">What is the return policy?</div>
+            <div class="answer">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore, assumenda.
+            </div>
+        </div>
+        <div class="content-container">
+            <div class="qustion">How can I track my order?</div>
+            <div class="answer">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum impedit sit quo architecto veritatis nemo facilis nesciunt hic iure.
+            </div>
+        </div>
+        <div class="content-container">
+            <div class="qustion">What payment methods do you accept?</div>
+            <div class="answer">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, incidunt necessitatibus.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Select all questions
+        const questions = document.querySelectorAll('.qustion');
+
+        // Add event listeners to each question
+        questions.forEach(question => {
+            question.addEventListener('click', () => {
+                const container = question.parentElement;
+
+                // Toggle active state
+                container.classList.toggle('active');
+
+                // Close other active containers
+                questions.forEach(q => {
+                    const otherContainer = q.parentElement;
+                    if (otherContainer !== container && otherContainer.classList.contains('active')) {
+                        otherContainer.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
